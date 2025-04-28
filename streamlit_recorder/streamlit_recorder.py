@@ -4,7 +4,7 @@ import soundfile as sf
 import tempfile
 import time
 
-st.set_page_config(page_title="\ud83c\udfa4\u9332\u97f3\u30a2\u30d7\u30ea", layout="centered")
+st.set_page_config(page_title="Voice Recorder App", layout="centered")
 
 st.title("\ud83c\udfa4 \u9332\u97f3\u30a2\u30d7\u30ea (\u30b9\u30de\u30db\u5bfe\u5fdc\u30b7\u30f3\u30d7\u30eb\u7248)")
 
