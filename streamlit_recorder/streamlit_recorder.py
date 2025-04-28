@@ -3,7 +3,6 @@ import numpy as np
 import soundfile as sf
 import tempfile
 import time
-from st_audiorec import st_audiorec
 
 st.set_page_config(page_title="\ud83c\udfa4\u9332\u97f3\u30a2\u30d7\u30ea", layout="centered")
 
@@ -24,7 +23,7 @@ button[kind="primary"] {
 """, unsafe_allow_html=True)
 
 # 録音データエリア
-st.write("\n\ud83d\udd0a \u9332\u97f3\u30dc\u30bf\u30f3を押して録音を開始！")
+st.write("\n\ud83d\udd0a \u9332\u97f3\u30dcタンを押して録音を開始！")
 
 # 録音計測用タイマー
 recording = False
@@ -48,12 +47,11 @@ else:
 
         st.success(f"\u9332\u97f3終了！\u9332音時間: {int(elapsed//60)}\u5206{int(elapsed%60)}\u79d2")
 
-        wav_audio_data = st_audiorec()
+        uploaded_audio = st.file_uploader("\u9332\u97f3\u30c7\u30fc\u30bf\u3092\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3057\u3066\u304f\u3060\u3055\u3044", type=["wav", "mp3"])
 
-        if isinstance(wav_audio_data, np.ndarray):
-            # 録音データ保存
+        if uploaded_audio is not None:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
-                sf.write(tmp_wav.name, wav_audio_data, samplerate=44100)
+                tmp_wav.write(uploaded_audio.read())
                 audio_file_path = tmp_wav.name
 
             # 保存ボタン
@@ -66,7 +64,7 @@ else:
                 )
 
         else:
-            st.info("\u9332\u97f3デ\u30fcタがまだないよ！")
+            st.info("\u9332\u97f3デ\u30fc\u30bfがまだないよ！")
 
     # 録音中はタイマー表示
     if st.session_state.recording and st.session_state.start_time:
@@ -76,7 +74,7 @@ else:
         st.markdown(f"## \u9332\u97f3中: {minutes:02d}:{seconds:02d}")
 
 # 破棄ボタン
-if st.button("\u274c \u7834棄", key="cancel"):
+if st.button("\u274c \u7834\u68c4", key="cancel"):
     st.session_state.recording = False
     st.session_state.start_time = None
-    st.warning("\u9332\u97f3を\u7834\u68c4しました")
+    st.warning("\u9332\u97f3を\u7834\u68c4しま\u3057\u305f")
